@@ -5,7 +5,7 @@ b) no, los constructores no se heredan
 
 c) super
 
-d) si
+d) si, siempre
 
 e) se invoca solo porque se llama por defecto al constructor sin parametros de la clase padre
 
