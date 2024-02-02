@@ -26,6 +26,7 @@ Sobrecarga es cuando tenemos varios metodos con el mismo nombre pero con diferen
 ### Ejercicio 4
 
 // Clase padre Video
+
 public class Video {
     protected String titulo;
     protected int minutos;
@@ -44,6 +45,7 @@ public class Video {
 }
 
 // Clase hija Pelicula que hereda de Video
+
 public class Pelicula extends Video {
     private String director;
     private double valoracion;
