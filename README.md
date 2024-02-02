@@ -60,3 +60,57 @@ public class Pelicula extends Video {
     }
 
 }
+
+d) Muestra primero el primer objeto Video con sus 2 atributos y luego solo 2 de los 4 atributos de Pelicula porque no sobrecargamos toString en la clase Pelicula.
+
+e)Sobrecargar el metodo toString en la clase Pelicula
+
+f)
+
+// Clase VideoMusical que hereda de la clase Video
+
+public class VideoMusical extends Video {
+
+    private String artista;
+    private String categoria;
+
+    // Constructor de la clase VideoMusical que invoca al constructor de la clase padre usando super()
+    public VideoMusical(String titulo, int minutos, String artista, String categoria) {
+        super(titulo, minutos);
+        this.artista = artista;
+        this.categoria = categoria;
+    }
+
+    // Método toString() sobrescrito para proporcionar una representación en cadena específica para VideoMusical
+    @Override
+    public String toString() {
+        return "VideoMusical [titulo=" + titulo + ", minutos=" + minutos + ", artista=" + artista + ", categoria=" + categoria + "]";
+    }
+}
+
+g)Tiene 4, los 2 suyos y los 2 heredados de la clase video
+
+h) A la clase video para que lo hereden todas la demás
+
+### Ejercicio 5
+
+a)No, marca es privado y no es accesible desde la clase hija
+
+b)Es correcto si esta en el mismo paquete o es una subclase es accesible al estar protegido
+
+c)Si es correcto
+
+d)Es correcto si esta en el mismo paquete o es una subclase es accesible al estar protegido
+
+e)Es correcto si esta en el mismo paquete o es una subclase es accesible al estar protegido
+
+f)La diferencia de estados entre los atributos y que no hayan getters y setters
+
+### Ejercicio 8
+
+Primero imprime Marca = Apple y luego imprime Marca = Acer
+
+
+
+
+
