@@ -74,6 +74,18 @@ public class AlumnoController implements Initializable {
                 listaAlumnos.add(alumno);
                 //Limpiamos los datos de entrada
                 limpiaDatos();
+            }else {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("Confirmación");
+                alerta.setHeaderText("Quieres modificar el alumno con DNI \n" + alumno.getDni());
+
+                alerta.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+                alerta.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        sustituyeAlumno(alumno);
+                    }
+                });
             }
         }
 
@@ -193,6 +205,14 @@ public class AlumnoController implements Initializable {
         tfEdad.clear();
         tfNombre.clear();
         tfDni.clear();
+    }
+
+    private void sustituyeAlumno(Alumno alumno){
+        int indice=listaAlumnos.indexOf(alumno);
+
+        if(indice!=-1){
+            listaAlumnos.set(indice, alumno);
+        }
     }
 
 }

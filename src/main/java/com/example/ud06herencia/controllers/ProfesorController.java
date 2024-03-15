@@ -75,6 +75,18 @@ public class ProfesorController implements Initializable {
 
                 //Limpiamos los datos de entrada
                 limpiaDatos();
+            }else {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("Confirmación");
+                alerta.setHeaderText("Quieres modificar el profesor con DNI \n" + profesor.getDni());
+
+                alerta.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+                alerta.showAndWait().ifPresent(response ->{
+                    if(response == ButtonType.YES){
+                        sustituyeProfesor(profesor);
+                    }
+                });
             }
 
 
@@ -185,5 +197,12 @@ public class ProfesorController implements Initializable {
         tfNombre.clear();
         tfDni.clear();
         tfSueldo.clear();
+    }
+    private void sustituyeProfesor(Profesor profesor){
+        int indice=listaProfesor.indexOf(profesor);
+
+        if(indice!=-1){
+            listaProfesor.set(indice, profesor);
+        }
     }
 }
