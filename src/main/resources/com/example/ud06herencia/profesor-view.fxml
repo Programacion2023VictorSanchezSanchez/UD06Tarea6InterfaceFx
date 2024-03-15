@@ -2,9 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -27,6 +29,14 @@
                 <TextField fx:id="tfEdad" promptText="edad" />
                 <Label fx:id="lbSueldo" text="Sueldo" />
             <TextField fx:id="tfSueldo" promptText="sueldo" />
+            <Label text="Ordenar por:" />
+            <RadioButton fx:id="rbNombre" mnemonicParsing="false" onAction="#onClickOrdenar" text="Nombre">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgOrdenar" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbEdad" mnemonicParsing="false" onAction="#onClickOrdenar" prefHeight="17.0" prefWidth="70.0" text="Edad" toggleGroup="$tgOrdenar" />
+            <RadioButton fx:id="rbSueldo" mnemonicParsing="false" onAction="#onClickOrdenar" prefHeight="17.0" prefWidth="70.0" text="Sueldo" toggleGroup="$tgOrdenar" />
                 <Button fx:id="btGuardar" mnemonicParsing="false" onAction="#onClickGuardar" text="Guardar" />
             <Button fx:id="btBorrar" mnemonicParsing="false" onAction="#onClickBorrar" prefHeight="25.0" prefWidth="59.0" text="Borrar" />
             </children>

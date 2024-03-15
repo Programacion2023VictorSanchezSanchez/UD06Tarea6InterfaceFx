@@ -4,6 +4,8 @@ import com.example.ud06herencia.model.Alumno;
 import com.example.ud06herencia.model.Curso;
 import com.example.ud06herencia.model.Persona;
 import com.example.ud06herencia.model.Profesor;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class ProfesorController implements Initializable {
@@ -36,6 +39,15 @@ public class ProfesorController implements Initializable {
 
     @FXML
     private Label lbNombre;
+
+    @FXML
+    private RadioButton rbSueldo;
+
+    @FXML
+    private RadioButton rbEdad;
+
+    @FXML
+    private RadioButton rbNombre;
 
     @FXML
     private TableColumn<Profesor, Integer> tcSueldo;
@@ -62,7 +74,22 @@ public class ProfesorController implements Initializable {
     private TextField tfSueldo;
 
     @FXML
+    private ToggleGroup tgOrdenar;
+
+    @FXML
     private TableView<Profesor> tvProfesores;
+
+    @FXML
+    void onClickOrdenar(ActionEvent event) {
+        if(rbNombre.isSelected()){
+            Collections.sort(listaProfesor);
+        }else if(rbEdad.isSelected()){
+            Collections.sort(listaProfesor,Profesor.edadComparator);
+        }else if(rbSueldo.isSelected()){
+            Collections.sort(listaProfesor,Profesor.sueldoComparator);
+        }
+
+    }
 
     /**
      * Comprobamos si existe el profesor y si existe lo borramos
@@ -160,6 +187,8 @@ public class ProfesorController implements Initializable {
         this.listaProfesor=listaProfesor;
         //Iniciamos tableview
         iniciaTableView();
+        //inicializamos radio button
+        iniciaRadioButton();
     }
 
 
@@ -212,6 +241,24 @@ public class ProfesorController implements Initializable {
             }
         }
         return profesor;
+    }
+
+    /**
+     * Inicializamos el radio button
+     */
+    void iniciaRadioButton(){
+        tgOrdenar.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldButton, Toggle newButton) {
+                if(rbNombre==newButton){
+                    Collections.sort(listaProfesor);
+                }else if(rbEdad==newButton){
+                    Collections.sort(listaProfesor,Profesor.edadComparator);
+                }else if(rbSueldo==newButton){
+                    Collections.sort(listaProfesor,Profesor.sueldoComparator);
+                }
+            }
+        });
     }
 
     /**

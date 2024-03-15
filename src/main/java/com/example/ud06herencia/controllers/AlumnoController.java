@@ -3,6 +3,8 @@ package com.example.ud06herencia.controllers;
 import com.example.ud06herencia.model.Alumno;
 import com.example.ud06herencia.model.Curso;
 import com.example.ud06herencia.model.Persona;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class AlumnoController implements Initializable {
@@ -41,6 +45,15 @@ public class AlumnoController implements Initializable {
     private Label lbNombre;
 
     @FXML
+    private RadioButton rbCurso;
+
+    @FXML
+    private RadioButton rbEdad;
+
+    @FXML
+    private RadioButton rbNombre;
+
+    @FXML
     private TableColumn<Alumno, Curso> tcCurso;
 
     @FXML
@@ -62,7 +75,22 @@ public class AlumnoController implements Initializable {
     private TextField tfNombre;
 
     @FXML
+    private ToggleGroup tgOrdenar;
+
+
+    @FXML
     private TableView<Alumno> tvAlumnos;
+    @FXML
+    void onClickOrdenar(ActionEvent event) {
+        if(rbNombre.isSelected()){
+            Collections.sort(listaAlumnos);
+        }else if(rbEdad.isSelected()){
+            Collections.sort(listaAlumnos,Alumno.edadComparator);
+        }else if(rbCurso.isSelected()){
+            Collections.sort(listaAlumnos,Alumno.cursoComparator);
+        }
+
+    }
 
     /**
      * Comprobamos si existe el alumno y si existe lo borramos
@@ -158,6 +186,26 @@ public class AlumnoController implements Initializable {
         this.listaAlumnos=listaAlumnos;
         //Iniciamos tableview
         iniciaTableView();
+        //Iniciamos el radio button
+        iniciaRadioButton();
+    }
+
+    /**
+     * Inicializamos el radio button
+     */
+    void iniciaRadioButton(){
+        tgOrdenar.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle oldButton, Toggle newButton) {
+                if(rbNombre==newButton){
+                    Collections.sort(listaAlumnos);
+                }else if(rbEdad==newButton){
+                    Collections.sort(listaAlumnos,Alumno.edadComparator);
+                }else if(rbCurso==newButton){
+                    Collections.sort(listaAlumnos,Alumno.cursoComparator);
+                }
+            }
+        });
     }
 
     /**

@@ -1,12 +1,13 @@
 package com.example.ud06herencia.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * Clase Persona con información de personas
  * Autor: Víctor Sánchez
  */
-public class Persona {
+public class Persona implements Comparable<Persona>{
 
     //variables
     private String dni;
@@ -93,4 +94,24 @@ public class Persona {
     public int hashCode() {
         return Objects.hash(getDni());
     }
+
+
+    /**
+     * Comparable nombre
+     * @param otraPersona the object to be compared.
+     * @return
+     */
+    @Override
+    public int compareTo(Persona otraPersona) {
+        return this.nombre.compareTo(otraPersona.getNombre());
+    }
+
+    //Comparator edad
+    public static Comparator<Persona> edadComparator = Comparator.comparingInt(Persona::getEdad);
+
+    //Comparator curso alumno
+    public static Comparator<Alumno> cursoComparator = Comparator.comparing(Alumno::getCurso);
+
+    //Comparator sueldo profesor
+    public static Comparator<Profesor> sueldoComparator = Comparator.comparing(Profesor::getSueldo);
 }
