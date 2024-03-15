@@ -20,6 +20,9 @@ public class AlumnoController implements Initializable {
     private ObservableList<Alumno> listaAlumnos;
 
     @FXML
+    private Button btBorrar;
+
+    @FXML
     private Button btGuardar;
 
     @FXML
@@ -62,7 +65,34 @@ public class AlumnoController implements Initializable {
     private TableView<Alumno> tvAlumnos;
 
     /**
-     * Creamos el alumno y lo guardamos al pulsar el boton
+     * Comprobamos si existe el alumno y si existe lo borramos
+     * @param event
+     */
+    @FXML
+    void onClickBorrar(ActionEvent event) {
+        String dni = tfDni.getText();
+        Alumno alumno = new Alumno(dni, "", 0, Curso.DAM);
+        int indice = listaAlumnos.indexOf(alumno);
+
+        if (alumno != null) {
+            if (listaAlumnos.contains(alumno)) {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("Confirmación");
+                alerta.setHeaderText("Quieres modificar el alumno con DNI \n" + alumno.getDni());
+
+                alerta.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+                alerta.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        listaAlumnos.remove(indice);
+                    }
+                });
+            }
+        }
+    }
+
+    /**
+     * Creamos el alumno y lo guardamos al pulsar el boton comprobando si existe ya y si lo queremos modificar
      * @param event
      */
     @FXML
@@ -91,6 +121,10 @@ public class AlumnoController implements Initializable {
 
     }
 
+    /**
+     * Nos mostrará los parametros al cliclarlos en la tabla
+     * @param event
+     */
     @FXML
     void onClickTvAlumnos(MouseEvent event) {
         Alumno alumno = tvAlumnos.getSelectionModel().getSelectedItem();
@@ -111,8 +145,12 @@ public class AlumnoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
     }
+
+    /**
+     * Inicializamos la aplicación
+     * @param listaAlumnos
+     */
     public void initialize(ObservableList<Alumno> listaAlumnos){
         //Iniciamos combobox
         iniciaCbCurso();
@@ -207,6 +245,10 @@ public class AlumnoController implements Initializable {
         tfDni.clear();
     }
 
+    /**
+     * Sustituimos alumno
+     * @param alumno que introduciremos
+     */
     private void sustituyeAlumno(Alumno alumno){
         int indice=listaAlumnos.indexOf(alumno);
 

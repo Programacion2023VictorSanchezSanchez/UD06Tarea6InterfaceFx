@@ -20,6 +20,9 @@ public class ProfesorController implements Initializable {
     private ObservableList<Profesor> listaProfesor;
 
     @FXML
+    private Button btBorrar;
+
+    @FXML
     private Button btGuardar;
 
     @FXML
@@ -62,7 +65,34 @@ public class ProfesorController implements Initializable {
     private TableView<Profesor> tvProfesores;
 
     /**
-     * Creamos el profesor y lo guardamos al pulsar el boton
+     * Comprobamos si existe el profesor y si existe lo borramos
+     * @param event
+     */
+    @FXML
+    void onClickBorrar(ActionEvent event) {
+        String dni = tfDni.getText();
+        Profesor profesor = new Profesor(dni, "", 0, 0);
+        int indice = listaProfesor.indexOf(profesor);
+
+        if (profesor != null) {
+            if (listaProfesor.contains(profesor)) {
+                Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+                alerta.setTitle("Confirmación");
+                alerta.setHeaderText("Quieres modificar el alumno con DNI \n" + profesor.getDni());
+
+                alerta.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+                alerta.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        listaProfesor.remove(indice);
+                    }
+                });
+            }
+        }
+    }
+
+    /**
+     * Creamos el profesor y lo guardamos al pulsar el boton comprobando si existe ya y si lo queremos modificar
      * @param event
      */
     @FXML
@@ -93,6 +123,11 @@ public class ProfesorController implements Initializable {
         }
 
     }
+
+    /**
+     * Mostramos los parametros de un profesor al cliclar en la tabla
+     * @param event
+     */
     @FXML
     void onClickTvProfesores(MouseEvent event) {
         Profesor profesor = tvProfesores.getSelectionModel().getSelectedItem();
@@ -116,6 +151,10 @@ public class ProfesorController implements Initializable {
 
     }
 
+    /**
+     * Inicializamos la aplicación
+     * @param listaProfesor
+     */
     public void initialize(ObservableList<Profesor> listaProfesor){
         //asignamos la lista
         this.listaProfesor=listaProfesor;
@@ -198,6 +237,11 @@ public class ProfesorController implements Initializable {
         tfDni.clear();
         tfSueldo.clear();
     }
+
+    /**
+     * Sustituimos un profesore
+     * @param profesor que vamos a introducir
+     */
     private void sustituyeProfesor(Profesor profesor){
         int indice=listaProfesor.indexOf(profesor);
 
