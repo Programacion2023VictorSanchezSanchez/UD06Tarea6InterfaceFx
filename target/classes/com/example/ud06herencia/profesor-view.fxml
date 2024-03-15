@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox prefHeight="473.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ud06herencia.controllers.ProfesorController">
+    <children>
+        <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="473.0" prefWidth="222.0" spacing="10.0">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/logo.jpg" />
+                    </image>
+                </ImageView>
+                <Label fx:id="lbDni" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="DNI" />
+                <TextField fx:id="tfDni" prefHeight="25.0" prefWidth="95.0" promptText="dni" />
+                <Label fx:id="lbNombre" text="Nombre" />
+                <TextField fx:id="tfNombre" promptText="nombre" />
+                <Label fx:id="lbEdad" text="Edad" />
+                <TextField fx:id="tfEdad" promptText="edad" />
+                <Label fx:id="lbSueldo" text="Sueldo" />
+            <TextField fx:id="tfSueldo" promptText="sueldo" />
+                <Button fx:id="btGuardar" mnemonicParsing="false" onAction="#onClickGuardar" text="Guardar" />
+            </children>
+        </VBox>
+        <TableView fx:id="tvProfesores" prefHeight="473.0" prefWidth="509.0">
+            <columns>
+                <TableColumn fx:id="tcDni" prefWidth="146.0" text="DNI" />
+                <TableColumn fx:id="tcNombre" prefWidth="182.0" text="NOMBRE" />
+                <TableColumn fx:id="tcEdad" minWidth="0.0" prefWidth="84.0" text="EDAD" />
+                <TableColumn fx:id="tcSueldo" prefWidth="95.0" text="SUELDO" />
+            </columns>
+        </TableView>
+    </children>
+</HBox>
