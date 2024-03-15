@@ -81,11 +81,16 @@ public class AlumnoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
+    public void initialize(ObservableList<Alumno> listaAlumnos){
         //Iniciamos combobox
         iniciaCbCurso();
+        //asignamos la lista
+        this.listaAlumnos=listaAlumnos;
         //Iniciamos tableview
         iniciaTableView();
-
     }
 
     /**
@@ -154,7 +159,7 @@ public class AlumnoController implements Initializable {
      * Iniciamos el TableView
      */
     private void iniciaTableView(){
-        listaAlumnos = FXCollections.observableArrayList();
+
 
         tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         tcDni.setCellValueFactory(new PropertyValueFactory("dni"));

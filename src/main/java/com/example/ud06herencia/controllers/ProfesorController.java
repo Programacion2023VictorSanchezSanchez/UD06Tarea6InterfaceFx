@@ -81,9 +81,15 @@ public class ProfesorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
+
+    public void initialize(ObservableList<Profesor> listaProfesor){
+        //asignamos la lista
+        this.listaProfesor=listaProfesor
         //Iniciamos tableview
         iniciaTableView();
-
     }
 
 
@@ -142,7 +148,7 @@ public class ProfesorController implements Initializable {
      * Iniciamos el TableView
      */
     private void iniciaTableView(){
-        listaProfesor = FXCollections.observableArrayList();
+
 
         tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         tcDni.setCellValueFactory(new PropertyValueFactory("dni"));
