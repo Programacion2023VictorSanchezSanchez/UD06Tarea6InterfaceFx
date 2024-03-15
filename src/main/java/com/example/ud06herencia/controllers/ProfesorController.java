@@ -69,10 +69,17 @@ public class ProfesorController implements Initializable {
     void onClickGuardar(ActionEvent event) {
         Profesor profesor = creaProfesor();
         if(profesor!=null){
-            listaProfesor.add(profesor);
+            if(!listaProfesor.contains(profesor)){
+                //Añadimos el profesor
+                listaProfesor.add(profesor);
+
+                //Limpiamos los datos de entrada
+                limpiaDatos();
+            }
+
+
         }
-        //Limpiamos los datos de entrada
-        limpiaDatos();
+
     }
     @FXML
     void onClickTvProfesores(MouseEvent event) {

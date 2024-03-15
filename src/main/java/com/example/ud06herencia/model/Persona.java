@@ -1,5 +1,7 @@
 package com.example.ud06herencia.model;
 
+import java.util.Objects;
+
 /**
  * Clase Persona con información de personas
  * Autor: Víctor Sánchez
@@ -79,4 +81,16 @@ public class Persona {
         return esCorrectoNIF;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return Objects.equals(dni, persona.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDni());
+    }
 }

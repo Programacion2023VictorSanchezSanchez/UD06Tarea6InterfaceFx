@@ -69,10 +69,14 @@ public class AlumnoController implements Initializable {
     void onClickGuardar(ActionEvent event) {
         Alumno alumno = creaAlumno();
         if(alumno!=null){
-            listaAlumnos.add(alumno);
+            if(!listaAlumnos.contains(alumno)) {
+                //guardamos alumno
+                listaAlumnos.add(alumno);
+                //Limpiamos los datos de entrada
+                limpiaDatos();
+            }
         }
-        //Limpiamos los datos de entrada
-        limpiaDatos();
+
     }
 
     @FXML
