@@ -9,8 +9,5 @@
         <module name="UD06Herencia" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="UD06Herencia" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

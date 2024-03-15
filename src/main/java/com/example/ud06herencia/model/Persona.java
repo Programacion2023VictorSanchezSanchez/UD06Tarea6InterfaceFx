@@ -75,26 +75,8 @@ public class Persona {
             esCorrectoNIF = false;
         }
 
-        // Calcular la letra esperada
-        int numero = Integer.parseInt(nif.substring(0, 8));
-        char letraEsperada = calcularLetraNIF(numero);
 
-        // Comparar con la letra proporcionada
-        if (letra != letraEsperada) {
-            esCorrectoNIF = false;
-        }
         return esCorrectoNIF;
     }
 
-    /**
-     * Metodo para calcular si la letra del NIF es la esperada
-     *
-     * @param numero por el cual vamos a hacer el modulo de 23 para sacar el indice
-     * @return devolvemos la letra esperada
-     */
-    public static char calcularLetraNIF(int numero) {
-        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-        int indice = numero % 23;
-        return letras.charAt(indice);
-    }
 }

@@ -3,6 +3,7 @@ package com.example.ud06herencia.controllers;
 import com.example.ud06herencia.model.Alumno;
 import com.example.ud06herencia.model.Curso;
 import com.example.ud06herencia.model.Persona;
+import com.example.ud06herencia.model.Profesor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,18 +15,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AlumnoController implements Initializable {
-
-    private ObservableList<Alumno> listaAlumnos;
+public class ProfesorController implements Initializable {
+    private ObservableList<Profesor> listaProfesor;
 
     @FXML
     private Button btGuardar;
 
     @FXML
-    private ComboBox<String> cbCurso;
-
-    @FXML
-    private Label lbCurso;
+    private Label lbSueldo;
 
     @FXML
     private Label lbDni;
@@ -37,16 +34,16 @@ public class AlumnoController implements Initializable {
     private Label lbNombre;
 
     @FXML
-    private TableColumn<Alumno, Curso> tcCurso;
+    private TableColumn<Profesor, Integer> tcSueldo;
 
     @FXML
-    private TableColumn<Alumno, String> tcDni;
+    private TableColumn<Profesor, String> tcDni;
 
     @FXML
-    private TableColumn<Alumno, Integer> tcEdad;
+    private TableColumn<Profesor, Integer> tcEdad;
 
     @FXML
-    private TableColumn<Alumno, String> tcNombre;
+    private TableColumn<Profesor, String> tcNombre;
 
     @FXML
     private TextField tfDni;
@@ -58,17 +55,20 @@ public class AlumnoController implements Initializable {
     private TextField tfNombre;
 
     @FXML
-    private TableView<Alumno> tvAlumnos;
+    private TextField tfSueldo;
+
+    @FXML
+    private TableView<Profesor> tvProfesores;
 
     /**
-     * Creamos el alumno y lo guardamos al pulsar el boton
+     * Creamos el profesor y lo guardamos al pulsar el boton
      * @param event
      */
     @FXML
     void onClickGuardar(ActionEvent event) {
-        Alumno alumno = creaAlumno();
-        if(alumno!=null){
-            listaAlumnos.add(alumno);
+        Profesor profesor = creaProfesor();
+        if(profesor!=null){
+            listaProfesor.add(profesor);
         }
         //Limpiamos los datos de entrada
         limpiaDatos();
@@ -81,23 +81,11 @@ public class AlumnoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //Iniciamos combobox
-        iniciaCbCurso();
         //Iniciamos tableview
         iniciaTableView();
 
     }
 
-    /**
-     * Iniciamos el combobox
-     */
-    private void iniciaCbCurso(){
-        Curso[] cursos = Curso.values();
-        for(Curso curso : cursos){
-            cbCurso.getItems().add(curso.toString());
-        }
-        cbCurso.setValue(cursos[0].toString());
-    }
 
     /**
      * Mandamos mensaje de error
@@ -116,13 +104,13 @@ public class AlumnoController implements Initializable {
      * Creamos el alumno con los datos introducidos comprobando que cumple los requisitos
      * @return el alumno creado
      */
-    private Alumno creaAlumno(){
-        Alumno alumno = null;
+    private Profesor creaProfesor(){
+        Profesor profesor = null;
         String nombre = tfNombre.getText();
 
         String dni = tfDni.getText();
 
-        Curso curso = Curso.valueOf(cbCurso.getValue());
+        int sueldo = Integer.parseInt(tfSueldo.getText());
 
         int edad;
 
@@ -137,31 +125,31 @@ public class AlumnoController implements Initializable {
         }else if(tfEdad.getText().isEmpty()){
             iniciaAlertaError("El alumno tiene que tener edad");
             tfEdad.requestFocus();
-        }else{
+        } else{
             try{
                 edad=Integer.parseInt(tfEdad.getText());
 
-                alumno = new Alumno(dni,nombre,edad,curso);
+                profesor = new Profesor(dni,nombre,edad,sueldo);
             }catch (NumberFormatException e){
                 iniciaAlertaError("La edad tiene que ser un numero entero");
                 tfEdad.requestFocus();
             }
         }
-        return alumno;
+        return profesor;
     }
 
     /**
      * Iniciamos el TableView
      */
     private void iniciaTableView(){
-        listaAlumnos = FXCollections.observableArrayList();
+        listaProfesor = FXCollections.observableArrayList();
 
         tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         tcDni.setCellValueFactory(new PropertyValueFactory("dni"));
         tcEdad.setCellValueFactory(new PropertyValueFactory("edad"));
-        tcCurso.setCellValueFactory(new PropertyValueFactory("curso"));
+        tcSueldo.setCellValueFactory(new PropertyValueFactory("sueldo"));
 
-        tvAlumnos.setItems(listaAlumnos);
+        tvProfesores.setItems(listaProfesor);
     }
 
     /**
@@ -171,7 +159,6 @@ public class AlumnoController implements Initializable {
         tfEdad.clear();
         tfNombre.clear();
         tfDni.clear();
+        tfSueldo.clear();
     }
-
 }
-
