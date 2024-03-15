@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,6 +74,17 @@ public class ProfesorController implements Initializable {
         //Limpiamos los datos de entrada
         limpiaDatos();
     }
+    @FXML
+    void onClickTvProfesores(MouseEvent event) {
+        Profesor profesor = tvProfesores.getSelectionModel().getSelectedItem();
+
+        if(profesor!=null){
+            tfDni.setText(profesor.getDni());
+            tfNombre.setText(profesor.getNombre());
+            tfEdad.setText(String.valueOf(profesor.getEdad()));
+            tfSueldo.setText(String.valueOf(profesor.getSueldo()));
+        }
+    }
 
     /**
      * Iniciamos la aplicacion
@@ -87,7 +99,7 @@ public class ProfesorController implements Initializable {
 
     public void initialize(ObservableList<Profesor> listaProfesor){
         //asignamos la lista
-        this.listaProfesor=listaProfesor
+        this.listaProfesor=listaProfesor;
         //Iniciamos tableview
         iniciaTableView();
     }
